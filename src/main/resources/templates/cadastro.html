@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    </head>
+    <body>
+        <h1>Cadastro de Filmes</h1>
+        
+        <form th:action="@{/cadastro}" th:object="${filme}" method="POST">
+            <p>ID: <input type="text" th:field="*{id}"/> </p>
+            <p>Nome: <input type="text" th:field="*{nome}"/> </p>
+            <p>Sinopse: <input type="text" th:field="*{sinopse}"/> </p>
+            <p>Gênero: <input type="text" th:field="*{genero}"/> </p>
+            <p>Ano de Lançamento: <input type="text" th:field="*{anoLancamento}"/> </p>
+            <p><input type="submit" value="Cadastrar" /></p> 
+        </form>
+    </body>
+</html>
