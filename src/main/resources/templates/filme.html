@@ -9,26 +9,28 @@
         <h1>Filmes Cadastrados</h1>
         
         <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>TITULO</th>
-                    <th>SINOPSE</th>
-                    <th>GÊNERO</th>
-                    <th>ANO DE LAÇAMENTO</th>
-                </tr>
-            </thead>    
-            
-            <tbody>
-                <tr th:each="filme : ${filmes}">
-                    <td th:text="${filme.id}"></td>
-                    <td th:text="${filme.nome}"></td>
-                    <td th:text="${filme.sinopse}"></td>
-                    <td th:text="${filme.genero}"></td>
-                    <td th:text="${filme.anoLancamento}"></td>
-                </tr>
-            </tbody>    
-        </table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>TÍTULO</th>
+            <th>SINOPSE</th>
+            <th>GÊNERO</th>
+            <th>ANO DE LANÇAMENTO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="filme, filmeIndex : ${filmes}">
+            <td th:text="${filme.id}"></td>
+            <td>
+                <a th:href="@{/filme/{id}(id=${filmeIndex.index})}" th:text="${filme.nome}"></a>
+            </td>
+            <td th:text="${filme.sinopse}"></td>
+            <td th:text="${filme.genero}"></td>
+            <td th:text="${filme.anoLancamento}"></td>
+        </tr>
+    </tbody>
+</table>
+
         
         
     </body>
