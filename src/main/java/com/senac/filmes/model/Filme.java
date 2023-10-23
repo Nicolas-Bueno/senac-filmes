@@ -12,6 +12,17 @@ public class Filme {
     private String genero;
     private int anoLancamento;
 
+    public Filme() {
+    }
+    
+    public Filme(int id, String nome, String sinopse, String genero, int anoLancamento) {
+        this.id = id;
+        this.nome = nome;
+        this.sinopse = sinopse;
+        this.genero = genero;
+        this.anoLancamento = anoLancamento;
+    }
+    
     public int getId() {
         return id;
     }

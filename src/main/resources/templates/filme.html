@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Filmes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Filmes Cadastrados</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITULO</th>
+                    <th>SINOPSE</th>
+                    <th>GÊNERO</th>
+                    <th>ANO DE LAÇAMENTO</th>
+                </tr>
+            </thead>    
+            
+            <tbody>
+                <tr th:each="filme : ${filmes}">
+                    <td th:text="${filme.id}"></td>
+                    <td th:text="${filme.nome}"></td>
+                    <td th:text="${filme.sinopse}"></td>
+                    <td th:text="${filme.genero}"></td>
+                    <td th:text="${filme.anoLancamento}"></td>
+                </tr>
+            </tbody>    
+        </table>
+        
+        
+    </body>
+</html>
