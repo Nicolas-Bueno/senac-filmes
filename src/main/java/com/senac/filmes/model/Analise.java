@@ -7,7 +7,7 @@ package com.senac.filmes.model;
 public class Analise {
     private int id;
     private Filme filme;
-    private String analise;
+    private String textoAnalise;
     private double nota;
 
     public int getId() {
@@ -26,12 +26,12 @@ public class Analise {
         this.filme = filme;
     }
 
-    public String getAnalise() {
-        return analise;
+    public String getTextoAnalise() {
+        return textoAnalise;
     }
 
-    public void setAnalise(String analise) {
-        this.analise = analise;
+    public void setTextoAnalise(String textoAnalise) {
+        this.textoAnalise = textoAnalise;
     }
 
     public double getNota() {
@@ -41,6 +41,7 @@ public class Analise {
     public void setNota(double nota) {
         this.nota = nota;
     }
+
     
     
 }

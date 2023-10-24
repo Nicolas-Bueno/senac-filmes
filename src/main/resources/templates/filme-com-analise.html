@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Detalhes do Filme com Análise</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+    <h1>Detalhes do Filme</h1>
+    <p>Nome: <span th:text="${detalhesFilme.nome}"></span></p>
+    <p>Sinopse: <span th:text="${detalhesFilme.sinopse}"></span></p>
+    <p>Ano: <span th:text="${detalhesFilme.anoLancamento}"></span></p>
+    <p>Gênero: <span th:text="${detalhesFilme.genero}"></span></p>
+
+    <h2>Análise do Filme</h2>
+    <p>Texto da Análise: <span th:text="${detalhesAnalise.textoAnalise}"></span></p>
+    <p>Nota: <span th:text="${detalhesAnalise.nota}"></span></p>
+</body>
+</html>

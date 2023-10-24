@@ -11,5 +11,7 @@
         <p>Sinopse: <span th:text="${detalhesFilme.sinopse}"></span></p>
         <p>Ano: <span th:text="${detalhesFilme.anoLancamento}"></span></p>
         <p>Gênero: <span th:text="${detalhesFilme.genero}"></span></p>
+        
+        <a th:href="@{/adiciona-analise/{id}(id=${detalhesFilme.id})}">Fazer uma Análise</a>
     </body>
 </html>

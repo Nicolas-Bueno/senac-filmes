@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Analise</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    </head>
+    <body>
+        
+        <h1>Adicionar Análise para o Filme</h1>
+                    
+        <form th:action="@{/adiciona-analise/{id}(id=${analise.filme.id})}" method="POST" th:object="${analise}">
+            <!-- Campos do formulário -->
+            <input type="hidden" th:field="*{filme.id}" th:value="${analise.filme.id}">
+                
+            <p>ID: <input type="text" th:field="*{id}"/> </p>
+            <label for="comentario">Comentário:</label>
+            <textarea id="comentario" name="comentario" th:field="*{textoAnalise}" rows="4" cols="50"></textarea>
+            <label for="nota">Nota:</label>
+            <input type="number" id="nota" name="nota" th:field="*{nota}" min="1" max="10">
+
+
+            <button type="submit">Salvar Análise</button>
+        </form>
+
+    </body>
+</html>
