@@ -19,10 +19,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="filme, filmeIndex : ${filmes}">
+        <tr th:each="filme : ${filmes}">
             <td th:text="${filme.id}"></td>
             <td>
-                <a th:href="@{/filme/{id}(id=${filmeIndex.index})}" th:text="${filme.nome}"></a>
+                <a th:href="@{/filme/{id}(id=${filme.id})}" th:text="${filme.nome}"></a>
             </td>
             <td th:text="${filme.sinopse}"></td>
             <td th:text="${filme.genero}"></td>
