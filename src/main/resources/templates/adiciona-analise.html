@@ -10,8 +10,9 @@
                     
         <form th:action="@{/adiciona-analise/{id}(id=${analise.filme.id})}" method="POST" th:object="${analise}">
             <!-- Campos do formulário -->
-            <input type="hidden" th:field="*{filme.id}" th:value="${analise.filme.id}">
-                
+            <!-- <input type="hidden" th:field="*{filme.id}" th:value="${analise.filme.id}"> -->
+            <input type="hidden" name="idFilme" th:value="${filme.id}">
+                    
             <p>ID: <input type="text" th:field="*{id}"/> </p>
             <label for="comentario">Comentário:</label>
             <textarea id="comentario" name="comentario" th:field="*{textoAnalise}" rows="4" cols="50"></textarea>

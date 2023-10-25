@@ -17,105 +17,109 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class WatchedMoviesController {
+
     private List<Filme> filmes = new ArrayList();
     private List<Analise> analises = new ArrayList();
-    
+
     @GetMapping("/cadastro")
-    public String cadastrarFilme(Model model){
+    public String cadastrarFilme(Model model) {
         model.addAttribute("filme", new Filme());
         return "cadastro";
     }
-    
+
     @PostMapping("/cadastro")
-    public String receberCadastro(Model model, @ModelAttribute Filme filme){
+    public String receberCadastro(Model model, @ModelAttribute Filme filme) {
         filmes.add(filme);
         model.addAttribute("filmes", filmes);
         return "filme";
     }
-    
+
     @GetMapping("/filme")
-    public String mostrarFilme(Model model){
+    public String mostrarFilme(Model model) {
         model.addAttribute("filmes", filmes);
         return "filme";
     }
-    
+
     @GetMapping("/filme/{id}")
-public String mostrarDetalhesFilme(@PathVariable int id, Model model) {
-    Filme filmeSelecionado = buscarFilmePorId(id);
+    public String mostrarDetalhesFilme(@PathVariable int id, Model model) {
+        System.out.println("ID do filme: " + id); // Adicione esta linha para verificar o ID
 
-    if (filmeSelecionado != null) {
-        model.addAttribute("detalhesFilme", filmeSelecionado);
-        return "detalhe-filme";
-    } else {
-        return "filme_nao_encontrado";
+        Filme filmeSelecionado = buscarFilmePorId(id);
+
+        if (filmeSelecionado != null) {
+            model.addAttribute("detalhesFilme", filmeSelecionado);
+            return "detalhe-filme";
+        } else {
+            return "filme_nao_encontrado";
+        }
     }
-}
 
-    
     @GetMapping("/adiciona-analise/{id}")
     public String mostrarFormularioAnalise(@PathVariable int id, Model model) {
         // Lógica para mostrar o formulário de adição de análise
-        Filme filme = filmes.get(id);
+        Filme filme = buscarFilmePorId(id);
+        System.out.println(filme.getId());
         Analise analise = new Analise();
         analise.setFilme(filme);
-        
+
         model.addAttribute("analise", analise);
+        model.addAttribute("filme", filme);
         return "adiciona-analise";
     }
-    
-    @PostMapping("/adiciona-analise/{id}")
-    public String salvarAnalise(Model model, @ModelAttribute Analise analise, @ModelAttribute Filme filme) {
-    analises.add(analise);
-    filmes.add(filme);
-    model.addAttribute("detalhesFilme", filme);
-    model.addAttribute("detalhesAnalise", analise);
-        System.out.println(filme.getId());
-    return "redirect:/filme-com-analise/" + filme.getId();
-}
 
-    
+    @PostMapping("/adiciona-analise/{id}")
+    public String salvarAnalise(@PathVariable int id, Model model, @ModelAttribute Analise analise) {
+        Filme filme = buscarFilmePorId(id); // Implemente o método para buscar o filme pelo ID
+        if (filme != null) {
+            analise.setFilme(filme);
+            analises.add(analise);
+            model.addAttribute("detalhesFilme", filme);
+            model.addAttribute("detalhesAnalise", analise);
+            System.out.println(filme.getId());
+        } else {
+            // Lógica de tratamento de erro ou mensagem de erro
+            System.out.println(filme.getId());
+        }
+        return "redirect:/filme-com-analise/" + id;
+    }
+
     @GetMapping("/filme-com-analise/{id}")
     public String mostrarDetalhesFilmeComAnalise(@PathVariable int id, Model model) {
-    // Lógica para carregar detalhes do filme e análise
-        if(id >=0 && id < filmes.size()){
-            Filme filmeSelecionado = filmes.get(id);
-            Analise analiseAssociada = encontrarAnalisePorFilme(filmeSelecionado);
-            
-            Filme detalhesFilme = new Filme();
-            detalhesFilme.setNome(filmeSelecionado.getNome());
-            detalhesFilme.setSinopse(filmeSelecionado.getSinopse());
-            detalhesFilme.setAnoLancamento(filmeSelecionado.getAnoLancamento());
-            detalhesFilme.setGenero(filmeSelecionado.getGenero());
-            
-            Analise detalhesAnalise = new Analise();
-            detalhesAnalise.setTextoAnalise(analiseAssociada.getTextoAnalise());
-            detalhesAnalise.setNota(analiseAssociada.getNota());
-            
-            model.addAttribute("detalhesFilme", detalhesFilme);
-            model.addAttribute("detalhesAnalise", detalhesAnalise);
-            
-            return "filme-com-analise";
-        } else{
-            return "filme_nao_encontrado";
-        }
-}
+        System.out.println("id do mostra filme com analise: " + id);
+        Filme filmeSelecionado = buscarFilmePorId(id);
+        Analise analiseAssociada = encontrarAnalisePorFilme(filmeSelecionado);
+
+        Filme detalhesFilme = new Filme();
+        detalhesFilme.setNome(filmeSelecionado.getNome());
+        detalhesFilme.setSinopse(filmeSelecionado.getSinopse());
+        detalhesFilme.setAnoLancamento(filmeSelecionado.getAnoLancamento());
+        detalhesFilme.setGenero(filmeSelecionado.getGenero());
+
+        Analise detalhesAnalise = new Analise();
+        detalhesAnalise.setTextoAnalise(analiseAssociada.getTextoAnalise());
+        detalhesAnalise.setNota(analiseAssociada.getNota());
+
+        model.addAttribute("detalhesFilme", detalhesFilme);
+        model.addAttribute("detalhesAnalise", detalhesAnalise);
+
+        return "filme-com-analise";
+    }
+
     public Analise encontrarAnalisePorFilme(Filme filmeSelecionado) {
         for (Analise analise : analises) {
             if (analise.getFilme().getId() == filmeSelecionado.getId()) {
                 return analise;
             }
         }
-        return null; // Retorna null se não encontrar a análise para o filme
+        return null;
     }
-    
+
     public Filme buscarFilmePorId(int id) {
         for (Filme filme : filmes) {
             if (filme.getId() == id) {
-                return filme; // Retorna o filme com o ID correspondente
+                return filme;
             }
         }
-        return null; // Retorna null se nenhum filme com o ID for encontrado
+        return null;
     }
-
-
 }
