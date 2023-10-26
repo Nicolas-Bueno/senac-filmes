@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Detalhe Filme</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-        <h1>Detalhes do Filme</h1>
-        <p>Nome: <span th:text="${detalhesFilme.nome}"></span></p>
-        <p>Sinopse: <span th:text="${detalhesFilme.sinopse}"></span></p>
-        <p>Ano: <span th:text="${detalhesFilme.anoLancamento}"></span></p>
-        <p>Gênero: <span th:text="${detalhesFilme.genero}"></span></p>
-        
-        <a th:href="@{/adiciona-analise/{id}(id=${detalhesFilme.id})}">Fazer uma Análise</a>
-    </body>
+<head>
+    <title>Detalhe Filme</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Detalhes do Filme</h1>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2 class="card-title" th:text="${detalhesFilme.nome}"></h2>
+                <p class="card-text">Sinopse: <span th:text="${detalhesFilme.sinopse}"></span></p>
+                <p class="card-text">Ano: <span th:text="${detalhesFilme.anoLancamento}"></span></p>
+                <p class="card-text">Gênero: <span th:text="${detalhesFilme.genero}"></span></p>
+                <a class="btn btn-primary" th:href="@{/adiciona-analise/{id}(id=${detalhesFilme.id})}">Fazer uma Análise</a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
+

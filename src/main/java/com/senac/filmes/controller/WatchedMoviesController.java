@@ -42,7 +42,7 @@ public class WatchedMoviesController {
 
     @GetMapping("/filme/{id}")
     public String mostrarDetalhesFilme(@PathVariable int id, Model model) {
-        System.out.println("ID do filme: " + id); // Adicione esta linha para verificar o ID
+        System.out.println("ID do filme: " + id);
 
         Filme filmeSelecionado = buscarFilmePorId(id);
 
@@ -56,7 +56,6 @@ public class WatchedMoviesController {
 
     @GetMapping("/adiciona-analise/{id}")
     public String mostrarFormularioAnalise(@PathVariable int id, Model model) {
-        // Lógica para mostrar o formulário de adição de análise
         Filme filme = buscarFilmePorId(id);
         System.out.println(filme.getId());
         Analise analise = new Analise();
@@ -69,7 +68,7 @@ public class WatchedMoviesController {
 
     @PostMapping("/adiciona-analise/{id}")
     public String salvarAnalise(@PathVariable int id, Model model, @ModelAttribute Analise analise) {
-        Filme filme = buscarFilmePorId(id); // Implemente o método para buscar o filme pelo ID
+        Filme filme = buscarFilmePorId(id); 
         if (filme != null) {
             analise.setFilme(filme);
             analises.add(analise);
@@ -77,8 +76,7 @@ public class WatchedMoviesController {
             model.addAttribute("detalhesAnalise", analise);
             System.out.println(filme.getId());
         } else {
-            // Lógica de tratamento de erro ou mensagem de erro
-            System.out.println(filme.getId());
+            System.out.println("erro");
         }
         return "redirect:/filme-com-analise/" + id;
     }
